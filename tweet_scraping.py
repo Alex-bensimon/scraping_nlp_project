@@ -18,7 +18,9 @@ tweet_content = driver.find_elements_by_css_selector("div[class='css-901oao r-hk
 for e in tweet_content:
     print(e.text)
     
-# Marche pas, prend toutes les balises de la page parce qu'elles ont le même nom
-tweet_name = driver.find_elements_by_css_selector("span[class='css-901oao css-16my406 r-1qd0xha r-ad9z0x r-bcqeeo r-qvutc0']")
-for n in tweet_name:
-    print(n.text)
+div = driver.find_elements_by_css_selector("div[class='css-901oao css-bfa6kz r-hkyrab r-1qd0xha r-a023e6 r-b88u0q r-ad9z0x r-bcqeeo r-3s2u2q r-qvutc0']")
+
+for d in div:
+    tweet_name = d.find_elements_by_css_selector("span[class='css-901oao css-16my406 r-1qd0xha r-ad9z0x r-bcqeeo r-qvutc0']")
+    for tn in tweet_name:
+        print(tn.text)
