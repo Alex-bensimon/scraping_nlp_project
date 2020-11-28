@@ -44,7 +44,7 @@ wait = WebDriverWait(driver,15)
 SCROLL_PAUSE_TIME = 2
 
 
-while nb_of_tweets<100:
+while nb_of_tweets<2000:
     
     #tweet_content = driver.find_elements_by_css_selector("article")
     #for e in tweet_content:
@@ -69,7 +69,7 @@ while nb_of_tweets<100:
     time.sleep(SCROLL_PAUSE_TIME)
 
 # create the csv file named tweets.csv
-np.savetxt("tweets.csv", content, delimiter=",",fmt='%s',encoding="utf-8")
+np.savetxt("new_tweets.csv", content, delimiter=",",fmt='%s',encoding="utf-8")
 
 
 #%%
