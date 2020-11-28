@@ -44,7 +44,7 @@ wait = WebDriverWait(driver,15)
 SCROLL_PAUSE_TIME = 2
 
 
-while nb_of_tweets<2000:
+while nb_of_tweets<100:
     
     #tweet_content = driver.find_elements_by_css_selector("article")
     #for e in tweet_content:
@@ -64,12 +64,12 @@ while nb_of_tweets<2000:
 
     # Scroll down to bottom
     scroll(wait,1,2)
-
     # Wait to load page
     time.sleep(SCROLL_PAUSE_TIME)
 
+
 # create the csv file named tweets.csv
-np.savetxt("new_tweets.csv", content, delimiter=",",fmt='%s',encoding="utf-8")
+np.savetxt("tweets.csv", content, delimiter="\\",fmt='%s',encoding="utf-8")
 
 
 #%%
@@ -78,10 +78,6 @@ np.savetxt("new_tweets.csv", content, delimiter=",",fmt='%s',encoding="utf-8")
 
 import pandas as pd 
 
-df = pd.read_csv("tweets.csv", error_bad_lines=False)
+df = pd.read_csv("tweets.csv", sep="\\")
 
-i = 0
-
-for txt in df:
-    print(df[i])
-    i = i + 1
+print(df.info())
