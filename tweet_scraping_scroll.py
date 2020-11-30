@@ -87,7 +87,6 @@ def get_tweet_from_subject(nb_tweet = 10, language = "en", subject = "bitcoin",d
 
 if __name__ == "__main__":   
     driver = get_driver()
-    print("hello")
     get_tweet_from_subject(10,"en","bitcoin",driver)
     
     
