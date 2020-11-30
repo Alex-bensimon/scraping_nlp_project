@@ -79,7 +79,7 @@ def get_tweet_from_subject(nb_tweet = 10, subject = "bitcoin",driver = get_drive
     
     full_name = full_name[2:]
     # create the csv file named tweets.csv
-    np.savetxt("tweets.csv", content, delimiter="\\",fmt='%s',encoding="utf-8")
+    np.savetxt("data/tweets.csv", content, delimiter="\\",fmt='%s',encoding="utf-8")
 
     
 
@@ -87,7 +87,7 @@ def get_tweet_from_subject(nb_tweet = 10, subject = "bitcoin",driver = get_drive
 
 if __name__ == "__main__":   
     driver = get_driver()
-    get_tweet_from_subject(10,"france",driver)
+    get_tweet_from_subject(10,"bitcoin",driver)
     
     
     
