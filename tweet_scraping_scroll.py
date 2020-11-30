@@ -53,8 +53,8 @@ def get_author_tweet():
 
 
 
-def get_tweet_from_subject(nb_tweet = 10, subject = "bitcoin",driver = get_driver()):
-    driver.get('https://twitter.com/search?q=lang%3Aen%20'+ subject +'&src=typed_query')      
+def get_tweet_from_subject(nb_tweet = 10, language = "en", subject = "bitcoin",driver = get_driver()):
+    driver.get('https://twitter.com/search?q=lang%3A'+ language +'%20'+ subject +'&src=typed_query')      
     wait = WebDriverWait(driver,15)
     SCROLL_PAUSE_TIME = 2   
     count = 0  
@@ -87,7 +87,8 @@ def get_tweet_from_subject(nb_tweet = 10, subject = "bitcoin",driver = get_drive
 
 if __name__ == "__main__":   
     driver = get_driver()
-    get_tweet_from_subject(10,"bitcoin",driver)
+    print("hello")
+    get_tweet_from_subject(10,"en","bitcoin",driver)
     
     
     
