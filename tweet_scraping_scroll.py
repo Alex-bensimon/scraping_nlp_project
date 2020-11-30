@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 """
 Created on Sun Nov 15 11:39:53 2020
 
@@ -37,8 +37,10 @@ def get_content_tweet():
     tweet_content = driver.find_elements_by_css_selector("div[class='css-901oao r-18jsvk2 r-1qd0xha r-a023e6 r-16dba41 r-ad9z0x r-bcqeeo r-bnwqim r-qvutc0']")
     for e in tweet_content:
         print("Tweet content : "+e.text)
+        print("#"*50)
         content = np.append(content,e.text.replace("\n"," "))
         nb_tweet += 1
+        print(nb_tweet)
     return content,nb_tweet 
     
 
@@ -72,22 +74,19 @@ def get_tweet_from_subject(nb_tweet = 10, language = "en", subject = "bitcoin",d
         scroll(wait,1,2)
         time.sleep(SCROLL_PAUSE_TIME)
         
-        print("content :",content)
-        print("nb_scrap_tweet",nb_scrap_tweet)
-        
         
     
     full_name = full_name[2:]
     # create the csv file named tweets.csv
-    np.savetxt("data/tweets.csv", content, delimiter="\\",fmt='%s',encoding="utf-8")
+    np.savetxt("data/"+ str(count) + "tweets_on_" + subject +".csv", full_content, delimiter="\\",fmt='%s',encoding="utf-8")
+    np.savetxt("data/"+ str(count) + "name_tweets_on_" + subject +".csv", full_name, delimiter="\\",fmt='%s',encoding="utf-8")
 
-    
 
-
+ 
 
 if __name__ == "__main__":   
     driver = get_driver()
-    get_tweet_from_subject(10,"en","bitcoin",driver)
+    get_tweet_from_subject(5000,"en","bitcoin",driver)
     
     
     
