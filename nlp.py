@@ -50,17 +50,12 @@ def clean_df(df):
     #cleaned_df = pd.DataFrame(columns=["content"])
     cleaned_tab = []
     for index,tweet in df.itertuples():
-        print("\n",tweet)
         token_tweet = tokenisation(tweet)
-        print(token_tweet)
         tweet_without_stpw = delete_stop_word(token_tweet)
-        print(tweet_without_stpw)
         porter_tweet = porterStemmerFct(tweet_without_stpw) 
-        print("Porter : ",porter_tweet)
         #cleaned_df['content'] = porter_tweet
         #cleaned_df[index].append(porter_tweet)
         cleaned_tab.append(porter_tweet)
-        print(cleaned_tab)
     
     return cleaned_tab
 
@@ -73,65 +68,3 @@ if __name__ == "__main__":
     df = pd.read_csv("data/1001tweets_on_bitcoin.csv", sep="\\", names=['Content'])
     clean = clean_df(df)
     
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-"""
-
-import string
-import re
-
-emoji_pattern = re.compile("["
-         u"\U0001F600-\U0001F64F"  
-         u"\U0001F300-\U0001F5FF" 
-         u"\U0001F680-\U0001F6FF"  
-         u"\U0001F1E0-\U0001F1FF"  
-         u"\U00002702-\U000027B0"
-         u"\U000024C2-\U0001F251"
-         "]+", flags=re.UNICODE)
-
-def clean_tweetdata(tweet):
- 
-    stop_words = set(stopwords.words('english'))
-    word_tokens = word_tokenize(tweet)
-    tweet = re.sub(r':', '', tweet)
-    tweet = re.sub(r'‚Ä¶', '', tweet)
-    tweet = re.sub(r'[^\x00-\x7F]+',' ', tweet)
-    tweet = emoji_pattern.sub(r'', tweet)
-    filtered_tweet = [w for w in word_tokens if not w in stop_words]
-    filtered_tweet = []
-    for w in word_tokens:
-        if w not in stop_words and w not in string.punctuation:
-            filtered_tweet.append(w)
-    return ' '.join(filtered_tweet)
-
-for ind,i in enumerate(df['Content']):
-    df['Content'][ind]=clean_tweetdata(i)
-    
-print(len(df['Content']))
-"""
