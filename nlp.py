@@ -1,36 +1,108 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Nov 30 10:17:42 2020
+Created on Sat Nov 14 09:54:44 2020
 
-@author: Alex
+@author: Victor HENRIO
 """
-
 
 import pandas as pd 
 import nltk 
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
+import spacy
+from spacy.lemmatizer import Lemmatizer
+from nltk.stem.porter import *
 
-df = pd.read_csv("tweets.csv", sep="\\", names=['Content'])
-col = ['Content']
-new_df = pd.DataFrame(columns=col)
-i = 0
 
-texte = df['Content'][0]
-texte.lower().split()
 
-texte = texte.lower()
+def tokenisation(text):
+    text_trait = text.replace("'"," ").replace("."," ")
+    texte_token = nltk.sent_tokenize(text_trait.lower())
+    all_words = [nltk.word_tokenize(sent) for sent in texte_token]
+    return all_words
 
-sentence_list = sent_tokenize(texte)
+    
+def delete_stop_word(array_of_word):
+    stop_words = stopwords.words('english') + [",", ".", "!", "?", ";", "...", "'s", "--", "&","'","#","@","%"] + [k for k in range(100)]
+    for i in range(len(array_of_word)):
+        array_of_word[i] = [w for w in array_of_word[i] if w not in stop_words]
+    return array_of_word
 
-print(sentence_list)
 
-word_list = word_tokenize(texte)
+def porterStemmerFct(array_of_word):
+    #print("\n","#"*40,"\n","\t PorterStemmerFct \n","#"*40,"\n")
+    stemmer = PorterStemmer()
+    singles = [stemmer.stem(plural) for plural in array_of_word[0]]
+    return singles
 
-print(word_list)
+def spacylemmatization(text):
+    print("\n","#"*40,"\n","\t Spacy Lemmatization \n","#"*40,"\n")
+    nlp = spacy.load('fr_core_news_sm')
+    text_nlp = nlp(text)
+    for token in text_nlp :
+        print (token, token.lemma_)
 
-#%%
+
+
+def clean_df(df):
+    #Pas réussi à append les listes dans le df
+    #cleaned_df = pd.DataFrame(columns=["content"])
+    cleaned_tab = []
+    for index,tweet in df.itertuples():
+        print("\n",tweet)
+        token_tweet = tokenisation(tweet)
+        print(token_tweet)
+        tweet_without_stpw = delete_stop_word(token_tweet)
+        print(tweet_without_stpw)
+        porter_tweet = porterStemmerFct(tweet_without_stpw) 
+        print("Porter : ",porter_tweet)
+        #cleaned_df['content'] = porter_tweet
+        #cleaned_df[index].append(porter_tweet)
+        cleaned_tab.append(porter_tweet)
+        print(cleaned_tab)
+    
+    return cleaned_tab
+
+
+        
+        
+        
+if __name__ == "__main__":
+    
+    df = pd.read_csv("data/1001tweets_on_bitcoin.csv", sep="\\", names=['Content'])
+    clean = clean_df(df)
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+"""
+
 import string
 import re
 
@@ -62,3 +134,4 @@ for ind,i in enumerate(df['Content']):
     df['Content'][ind]=clean_tweetdata(i)
     
 print(len(df['Content']))
+"""
