@@ -15,6 +15,9 @@ from selenium.webdriver.support import expected_conditions as EC
 
 import pandas as pd 
 import numpy as np
+import time
+import sys
+
 
 
 def get_driver():
@@ -26,7 +29,6 @@ def get_driver():
 
 def scroll(wait, nbr_of_scroll=1, time_to_sleep=15):
     for item in range(1): 
-        print("scroll")
         wait.until(EC.visibility_of_element_located((By.TAG_NAME, "body"))).send_keys(Keys.END)
         sleep(time_to_sleep)
 
@@ -36,11 +38,8 @@ def get_content_tweet():
     nb_tweet = 0
     tweet_content = driver.find_elements_by_css_selector("div[class='css-901oao r-18jsvk2 r-1qd0xha r-a023e6 r-16dba41 r-ad9z0x r-bcqeeo r-bnwqim r-qvutc0']")
     for e in tweet_content:
-        print("Tweet content : "+e.text)
-        print("#"*50)
         content = np.append(content,e.text.replace("\n"," "))
         nb_tweet += 1
-        print(nb_tweet)
     return content,nb_tweet 
     
 
@@ -50,19 +49,18 @@ def get_author_tweet():
     tweet_name = driver.find_elements_by_css_selector("a[class='css-4rbku5 css-18t94o4 css-1dbjc4n r-1loqt21 r-1wbh5a2 r-dnmrzs r-1ny4l3l']")
     for e in tweet_name:
         tw_name = np.append(tw_name,e.text)
-        print("Tweent Name :",e.text,"\n")
     return tw_name
 
 
 
 def get_tweet_from_subject(nb_tweet = 10, language = "en", subject = "bitcoin",driver = get_driver(),min_replies=20,min_faves=20,min_retweet=20):
-    #driver.get('https://twitter.com/search?q=lang%3A'+ language +'%20'+ subject +'&src=typed_query&f=live')  
     driver.get('https://twitter.com/search?f=live&q=lang%3A'+ language +'%20'+ subject +'%'+ str(min_replies) +'min_replies%3A20%'+ str(min_replies) +'min_faves%3A20%'+ str(min_replies) +'min_retweets%3A20&src=typed_query')
     wait = WebDriverWait(driver,15)
     SCROLL_PAUSE_TIME = 2   
     count = 0  
     full_content = np.array([])
-    full_name = np.array([])
+    full_name = np.array([])  
+    
     while count < nb_tweet:
             
         content,nb_scrap_tweet = get_content_tweet()    
@@ -74,8 +72,9 @@ def get_tweet_from_subject(nb_tweet = 10, language = "en", subject = "bitcoin",d
         
         scroll(wait,1,2)
         time.sleep(SCROLL_PAUSE_TIME)
-        
-        
+        loading_info(count, nb_tweet,"Scraping")
+                       
+            
     
     full_name = full_name[2:]
     # create the csv file named tweets.csv
@@ -83,11 +82,16 @@ def get_tweet_from_subject(nb_tweet = 10, language = "en", subject = "bitcoin",d
     np.savetxt("data/"+ str(count) + "name_tweets_on_" + subject +".csv", full_name, delimiter="\\",fmt='%s',encoding="utf-8")
 
 
+def loading_info(prog,end,prefix):
+    progression = (prog/end)*100
+    sys.stdout.write(prefix + " ... %s%%\r" % (progression)+"\n")
+    sys.stdout.flush()
+    
  
 
 if __name__ == "__main__":   
     driver = get_driver()
-    get_tweet_from_subject(1000,"en","bitcoin",driver)
+    get_tweet_from_subject(100,"en","bitcoin",driver,20,20,20)
     
     
     
