@@ -6,16 +6,14 @@ Created on Sun Nov 15 11:39:53 2020
 """
 
 import time
-from bs4 import BeautifulSoup
 from time import sleep
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-import pandas as pd 
+
 import numpy as np
-import time
 import sys
 
 
@@ -72,8 +70,7 @@ def get_tweet_from_subject(nb_tweet = 10, language = "en", subject = "bitcoin",d
         
         scroll(wait,1,2)
         time.sleep(SCROLL_PAUSE_TIME)
-        loading_info(count, nb_tweet,"Scraping")
-                       
+        loading_info(count, nb_tweet,"Scraping")                     
             
     
     full_name = full_name[2:]
