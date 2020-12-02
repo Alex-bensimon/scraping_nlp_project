@@ -14,11 +14,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 You need to clone the entire project on your device by doing this command :
 ```
-* git clone https://github.com/Alex-bensimon/scraping_nlp_project.git
+git clone https://github.com/Alex-bensimon/scraping_nlp_project.git
 ```
 And then execute the main file by execute this command :
 ```
-* main()
+main()
 ```
 You will see the processus running and the result appears.
 
