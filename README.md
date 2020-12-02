@@ -1,4 +1,4 @@
-# Determine the polarity of a group of tweets
+# Determine polarity of tweets get from scraping
 
 **Description** : We scrap the data from the social media Twetter to collect data about Bitcoin, the famous crypto-currency. 
 After cleaning those data and place them in a pandas dataframe, our program is doing a sentimental analysis on each tweet and return the polarity.
