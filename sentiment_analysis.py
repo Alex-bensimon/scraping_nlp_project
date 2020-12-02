@@ -50,8 +50,7 @@ def get_sentiment_analyse(tweet_list):
     print(' Negative polarities are '+str(negpol))
     print('Number of subjective tweets are : '+ str(subcount))
     
-               
-            
+                        
     
     
 
