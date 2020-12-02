@@ -24,7 +24,7 @@ You will see the processus running and the result appears.
 
 ## Parameters
 
-By changing the argument in the function "get_tweet_from_subject" you can personalise the way you scrap. 
+By changing arguments in the function "get_tweet_from_subject" you can personalise the way you scrap. 
 You can play on the number of like, replies, retweets. 
 You can also change the subject and the language of the scraping (and the sentimental analysis) by replacing "bitcoin" and "en".
 
