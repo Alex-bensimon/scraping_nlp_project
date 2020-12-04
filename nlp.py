@@ -9,7 +9,6 @@ import pandas as pd
 import nltk 
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
-from sklearn.feature_extraction.text import TfidfVectorizer
 import spacy
 from spacy.lemmatizer import Lemmatizer
 from nltk.stem.porter import *
