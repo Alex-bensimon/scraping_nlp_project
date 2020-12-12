@@ -26,7 +26,7 @@ def get_sentence_from_array(array_of_word):
 
 
 
-def get_sentiment_analyse(tweet_list):
+def get_sentiment_analyse(tweet_list,schema=True):
     sentiments=[]
     subjectivity=[]
     
@@ -54,18 +54,19 @@ def get_sentiment_analyse(tweet_list):
     print(' Negative polarities are '+str(negpol))
     print('Number of subjective tweets are : '+ str(subcount))
     
-    print("Average sentiment is: "+str(sum(sentiments)/len(sentiments)))
+    Average_senti = sum(sentiments)/len(sentiments)
     
+    print("Average sentiment is: "+str(Average_senti)) 
     
-    
-    pols=['Neutral', 'Positive', 'Negative']
-    polcount=[nopol,pospol,negpol]
-    plt.pie(polcount, labels = pols,autopct='%1.2f%%')
+    if schema :
+        pols=['Neutral', 'Positive', 'Negative']
+        polcount=[nopol,pospol,negpol]
+        plt.pie(polcount, labels = pols,autopct='%1.2f%%')
     
     tweet_list['Sentiment']=sentiments
     tweet_list['Subjectivity']=subjectivity
     print(tweet_list.head())
-    return (tweet_list)
+    return (Average_senti)
     
     
 
