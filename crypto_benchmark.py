@@ -94,7 +94,6 @@ def benchmark(nb_crypto):
 
 
 
-
 if __name__ == "__main__":
     benchmark(nb_crypto=3)
 
